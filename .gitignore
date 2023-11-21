@@ -1,5 +1,5 @@
 build
 .cache
 .vscode
-output
+output/*
 CMakeLists.txt

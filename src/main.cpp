@@ -1,6 +1,7 @@
 #include <sil/sil.hpp>
 #include "random.hpp"
-#include "math.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 void green(sil::Image &img)
 {
@@ -147,6 +148,34 @@ void disc(sil::Image &img, int rayon)
     }
 }
 
+void circle(sil::Image &img, int rayon, int absCenter, int ordCenter)
+{
+    for (int x{0}; x < img.height(); x++)
+    {
+        for (int y{0}; y < img.width(); y++)
+        {
+            if (std::pow(x - absCenter, 2) + std::pow(y - ordCenter, 2) < std::pow(rayon, 2) &&
+                std::pow(x - absCenter, 2) + std::pow(y - ordCenter, 2) > std::pow(rayon - 8, 2))
+            {
+                img.pixel(x, y).r = 1;
+                img.pixel(x, y).g = 1;
+                img.pixel(x, y).b = 1;
+            }
+        }
+    }
+}
+
+void rosace(sil::Image &img, int rayon)
+{
+    int absCenter = img.width() / 2;
+    int ordCenter = img.height() / 2;
+    circle(img, 100, absCenter, ordCenter);
+    for (double i{0}; i < 2 * M_PI; i += M_PI / 3)
+    {
+        circle(img, 100, absCenter + rayon * std::cos(i), ordCenter + rayon * std::sin(i));
+    }
+}
+
 int main()
 {
     {
@@ -203,5 +232,15 @@ int main()
         sil::Image image(500, 500);
         disc(image, 250);
         image.save("output/disc.png");
+    }
+    {
+        sil::Image image(500, 500);
+        circle(image, 100, image.width() / 2, image.height() / 2);
+        image.save("output/circle.png");
+    }
+    {
+        sil::Image image(500, 500);
+        rosace(image, 100);
+        image.save("output/rosace.png");
     }
 }
