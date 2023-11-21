@@ -210,6 +210,19 @@ void mosaique_reduced(sil::Image &img)
     }
 }
 
+sil::Image mosaique_bigger(sil::Image img)
+{
+    sil::Image res{img.width() * 5, img.height() * 5};
+    for (int x{0}; x < res.width(); x++)
+    {
+        for (int y{0}; y < res.height(); y++)
+        {
+            res.pixel(x, y) = img.pixel(x % img.width(), y % img.height());
+        }
+    }
+    return res;
+}
+
 int main()
 {
     {
@@ -286,5 +299,9 @@ int main()
         sil::Image image("img/logo.png");
         mosaique_reduced(image);
         image.save("output/mosaique_reduced.png");
+    }
+    {
+        sil::Image image("img/logo.png");
+        mosaique_bigger(image).save("output/mosaique_bigger.png");
     }
 }
