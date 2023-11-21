@@ -176,6 +176,40 @@ void rosace(sil::Image &img, int rayon)
     }
 }
 
+sil::Image reduc(sil::Image img)
+{
+    sil::Image res{img.width() / 5, img.height() / 5};
+    for (int x{0}; x < img.width(); x++)
+    {
+        for (int y{0}; y < img.height(); y++)
+        {
+            if (x % 5 == 0 && y % 5 == 0)
+            {
+                res.pixel(x / 5, y / 5) = img.pixel(x, y);
+            }
+        }
+    }
+    return res;
+}
+
+void mosaique_reduced(sil::Image &img)
+{
+    sil::Image reduced{reduc(img)};
+    for (int x{0}; x < img.width(); x += reduced.width())
+    {
+        for (int y{0}; y < img.height(); y += reduced.height())
+        {
+            for (int abs{0}; abs < reduced.width(); abs++)
+            {
+                for (int ord{0}; ord < reduced.height(); ord++)
+                {
+                    img.pixel(abs + x, ord + y) = reduced.pixel(abs, ord);
+                }
+            }
+        }
+    }
+}
+
 int main()
 {
     {
@@ -242,5 +276,15 @@ int main()
         sil::Image image(500, 500);
         rosace(image, 100);
         image.save("output/rosace.png");
+    }
+    {
+        // petite image compressée (qu'on utilise pour faire la mosaique)
+        sil::Image image("img/logo.png");
+        reduc(image).save("output/reduced.png");
+    }
+    {
+        sil::Image image("img/logo.png");
+        mosaique_reduced(image);
+        image.save("output/mosaique_reduced.png");
     }
 }
