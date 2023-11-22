@@ -412,33 +412,30 @@ sil::Image convolution(sil::Image img, int coeff)
     {
         for (int y{0}; y < res.height(); y++)
         {
-            int avgR{0};
-            int avgG{0};
-            int avgB{0};
+            // float avgR{0};
+            // float avgG{0};
+            // float avgB{0};
+            glm::vec3 avg{0.f};
             for (int i{-((coeff - 1) / 2)}; i < coeff - (coeff - 1) / 2; i++)
             {
                 for (int j{-((coeff - 1) / 2)}; j < coeff - (coeff - 1) / 2; j++)
                 {
                     if ((x + i >= 0 && y + j >= 0) && (x + i < img.width() && y + j < img.height()))
                     {
-                        avgR += img.pixel(x + i, y + j).r;
-                        avgG += img.pixel(x + i, y + j).g;
-                        avgB += img.pixel(x + i, y + j).b;
+                        // avgR += img.pixel(x + i, y + j).r;
+                        // avgG += img.pixel(x + i, y + j).g;
+                        // avgB += img.pixel(x + i, y + j).b;
+                        avg += img.pixel(x + i, y + j);
                     }
                 }
             }
-            for (int i{-((coeff - 1) / 2)}; i < coeff - (coeff - 1) / 2; i++)
-            {
-                for (int j{-((coeff - 1) / 2)}; j < coeff - (coeff - 1) / 2; j++)
-                {
-                    if ((x + i >= 0 && y + j >= 0) && (x + i < img.width() && y + j < img.height()))
-                    {
-                        res.pixel(x + i, y + j).r = avgR / std::pow(coeff, 2);
-                        res.pixel(x + i, y + j).g = avgG / std::pow(coeff, 2);
-                        res.pixel(x + i, y + j).b = avgB / std::pow(coeff, 2);
-                    }
-                }
-            }
+            // res.pixel(x, y).r = avgR / std::pow(coeff, 2);
+            // res.pixel(x, y).g = avgG / std::pow(coeff, 2);
+            // res.pixel(x, y).b = avgB / std::pow(coeff, 2);
+            avg.r /= std::pow(coeff, 2);
+            avg.b /= std::pow(coeff, 2);
+            avg.g /= std::pow(coeff, 2);
+            res.pixel(x, y) = avg;
         }
     }
     return res;
@@ -560,6 +557,6 @@ int main()
     }
     {
         sil::Image image("img/logo.png");
-        convolution(image, 3).save("output/convolution.png");
+        convolution(image, 17).save("output/convolution.png");
     }
 }
