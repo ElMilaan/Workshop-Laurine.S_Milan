@@ -405,7 +405,7 @@ void fractal(sil::Image &img)
     }
 }
 
-sil::Image convolution(sil::Image img, int coeff)
+sil::Image convolution(sil::Image img, int coeff, int kernel)
 {
     sil::Image res{img.width(), img.height()};
     for (int x{0}; x < res.width(); x++)
@@ -416,26 +416,105 @@ sil::Image convolution(sil::Image img, int coeff)
             // float avgG{0};
             // float avgB{0};
             glm::vec3 avg{0.f};
-            for (int i{-((coeff - 1) / 2)}; i < coeff - (coeff - 1) / 2; i++)
+            switch (kernel)
             {
-                for (int j{-((coeff - 1) / 2)}; j < coeff - (coeff - 1) / 2; j++)
+            case 1: // flou/
+                for (int i{-((coeff - 1) / 2)}; i < coeff - (coeff - 1) / 2; i++)
                 {
-                    if ((x + i >= 0 && y + j >= 0) && (x + i < img.width() && y + j < img.height()))
+                    for (int j{-((coeff - 1) / 2)}; j < coeff - (coeff - 1) / 2; j++)
                     {
-                        // avgR += img.pixel(x + i, y + j).r;
-                        // avgG += img.pixel(x + i, y + j).g;
-                        // avgB += img.pixel(x + i, y + j).b;
-                        avg += img.pixel(x + i, y + j);
+                        if ((x + i >= 0 && y + j >= 0) && (x + i < img.width() && y + j < img.height()))
+                        {
+                            // avgR += img.pixel(x + i, y + j).r;
+                            // avgG += img.pixel(x + i, y + j).g;
+                            // avgB += img.pixel(x + i, y + j).b;
+                            avg += img.pixel(x + i, y + j);
+                        }
                     }
                 }
+                // res.pixel(x, y).r = avgR / std::pow(coeff, 2);
+                // res.pixel(x, y).g = avgG / std::pow(coeff, 2);
+                // res.pixel(x, y).b = avgB / std::pow(coeff, 2);
+                avg.r /= std::pow(coeff, 2);
+                avg.b /= std::pow(coeff, 2);
+                avg.g /= std::pow(coeff, 2);
+                res.pixel(x, y) = avg;
+                break;
+
+            case 2: // outline
+                for (int i{-((coeff - 1) / 2)}; i < coeff - (coeff - 1) / 2; i++)
+                {
+                    for (int j{-((coeff - 1) / 2)}; j < coeff - (coeff - 1) / 2; j++)
+                    {
+
+                        if ((x + i >= 0 && y + j >= 0) && (x + i < img.width() && y + j < img.height()))
+                        {
+                            if (i == 0 && j == 0)
+                            {
+                                avg += img.pixel(x, y) * 8.f;
+                            }
+                            else
+                            {
+                                avg -= img.pixel(x + i, y + j);
+                            }
+                        }
+                    }
+                }
+                res.pixel(x, y) = avg;
+                break;
+
+            case 3: // sharpen
+                for (int i{-((coeff - 1) / 2)}; i < coeff - (coeff - 1) / 2; i++)
+                {
+                    for (int j{-((coeff - 1) / 2)}; j < coeff - (coeff - 1) / 2; j++)
+                    {
+
+                        if ((x + i >= 0 && y + j >= 0) && (x + i < img.width() && y + j < img.height()))
+                        {
+                            if (i == 0 && j == 0)
+                            {
+                                avg += img.pixel(x, y) * 5.f;
+                            }
+                            else if (i == 0 || j == 0)
+                            {
+                                avg -= img.pixel(x + i, y + j);
+                            }
+                        }
+                    }
+                }
+                res.pixel(x, y) = avg;
+                break;
+
+            case 4: // emboss
+                for (int i{-((coeff - 1) / 2)}; i < coeff - (coeff - 1) / 2; i++)
+                {
+                    for (int j{-((coeff - 1) / 2)}; j < coeff - (coeff - 1) / 2; j++)
+                    {
+
+                        if ((x + i >= 0 && y + j >= 0) && (x + i < img.width() && y + j < img.height()))
+                        {
+                            if ((i == 0 && j == 0) || (i == 0 && j == 1) || (i == 1 && j == 0))
+                            {
+                                avg += img.pixel(x, y);
+                            }
+                            else if ((i == 0 && j == -1) || (i == -1 && j == 0))
+                            {
+                                avg -= img.pixel(x + i, y + j);
+                            }
+                            else if (i == -1 && j == -1)
+                            {
+                                avg -= img.pixel(x + i, y + j) * 2.f;
+                            }
+                            else if (i == 1 && j == 1)
+                            {
+                                avg -= img.pixel(x + i, y + j) * -2.f;
+                            }
+                        }
+                    }
+                }
+                res.pixel(x, y) = avg;
+                break;
             }
-            // res.pixel(x, y).r = avgR / std::pow(coeff, 2);
-            // res.pixel(x, y).g = avgG / std::pow(coeff, 2);
-            // res.pixel(x, y).b = avgB / std::pow(coeff, 2);
-            avg.r /= std::pow(coeff, 2);
-            avg.b /= std::pow(coeff, 2);
-            avg.g /= std::pow(coeff, 2);
-            res.pixel(x, y) = avg;
         }
     }
     return res;
@@ -556,7 +635,13 @@ int main()
         image.save("output/fractal.png");
     }
     {
+        // cas 1 : blur
+        // cas 2 : outline
+        // cas 3 : sharpen
         sil::Image image("img/logo.png");
-        convolution(image, 17).save("output/convolution.png");
+        convolution(image, 17, 1).save("output/blur.png");
+        convolution(image, 3, 2).save("output/outline.png");
+        convolution(image, 3, 3).save("output/sharpen.png");
+        convolution(image, 3, 4).save("output/emboss.png");
     }
 }
