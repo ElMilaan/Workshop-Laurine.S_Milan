@@ -343,14 +343,14 @@ void glitch(sil::Image &img)
     }
 }
 
-void fractal_pixelized(sil::Image &img)
+void fractal_pixelized(sil::Image &img) // un peu pixélisé tout ça
 {
     for (float x{0}; x < img.width(); x++)
     {
         for (float y{0}; y < img.height(); y++)
         {
-            std::complex<float> c{(x / 250 - 1) * 2, (y / 250 - 1) * 2};
             std::complex<float> z{0.f, 0.f};
+            std::complex<float> c{(x / 250 - 1) * 2, (y / 250 - 1) * 2};
             float color = 1;
             for (int i{0}; i < 100; i++)
             {
@@ -359,16 +359,16 @@ void fractal_pixelized(sil::Image &img)
                 if (std::abs(z) > 2)
                 {
                     img.pixel(x, y).r = 0.f;
-                    img.pixel(x, y).b = 0.f;
                     img.pixel(x, y).g = 0.f;
+                    img.pixel(x, y).b = 0.f;
                     break;
                 }
             }
             if (std::abs(z) <= 2)
             {
                 img.pixel(x, y).r = color;
-                img.pixel(x, y).b = color;
                 img.pixel(x, y).g = color;
+                img.pixel(x, y).b = color;
             }
         }
     }
@@ -380,18 +380,18 @@ void fractal(sil::Image &img)
     {
         for (float y{0}; y < img.height(); y++)
         {
-            std::complex<float> c{(x / 250 - 1) * 2, (y / 250 - 1) * 2};
             std::complex<float> z{0.f, 0.f};
+            std::complex<float> c{(x / 250 - 1) * 2, (y / 250 - 1) * 2};
             float color = 0;
             for (int i{0}; i < 100; i++)
             {
                 z = z * z + c;
-                color += 0.04;
+                color += 0.03;
                 if (std::abs(z) > 2)
                 {
                     img.pixel(x, y).r = color;
-                    img.pixel(x, y).b = color;
                     img.pixel(x, y).g = color;
+                    img.pixel(x, y).b = color;
                     break;
                 }
             }
@@ -403,6 +403,45 @@ void fractal(sil::Image &img)
             }
         }
     }
+}
+
+sil::Image convolution(sil::Image img, int coeff)
+{
+    sil::Image res{img.width(), img.height()};
+    for (int x{0}; x < res.width(); x++)
+    {
+        for (int y{0}; y < res.height(); y++)
+        {
+            int avgR{0};
+            int avgG{0};
+            int avgB{0};
+            for (int i{-((coeff - 1) / 2)}; i < coeff - (coeff - 1) / 2; i++)
+            {
+                for (int j{-((coeff - 1) / 2)}; j < coeff - (coeff - 1) / 2; j++)
+                {
+                    if ((x + i >= 0 && y + j >= 0) && (x + i < img.width() && y + j < img.height()))
+                    {
+                        avgR += img.pixel(x + i, y + j).r;
+                        avgG += img.pixel(x + i, y + j).g;
+                        avgB += img.pixel(x + i, y + j).b;
+                    }
+                }
+            }
+            for (int i{-((coeff - 1) / 2)}; i < coeff - (coeff - 1) / 2; i++)
+            {
+                for (int j{-((coeff - 1) / 2)}; j < coeff - (coeff - 1) / 2; j++)
+                {
+                    if ((x + i >= 0 && y + j >= 0) && (x + i < img.width() && y + j < img.height()))
+                    {
+                        res.pixel(x + i, y + j).r = avgR / std::pow(coeff, 2);
+                        res.pixel(x + i, y + j).g = avgG / std::pow(coeff, 2);
+                        res.pixel(x + i, y + j).b = avgB / std::pow(coeff, 2);
+                    }
+                }
+            }
+        }
+    }
+    return res;
 }
 
 int main()
@@ -518,5 +557,9 @@ int main()
         sil::Image image(500, 500);
         fractal(image);
         image.save("output/fractal.png");
+    }
+    {
+        sil::Image image("img/logo.png");
+        convolution(image, 3).save("output/convolution.png");
     }
 }
