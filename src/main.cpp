@@ -3,6 +3,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <complex>
+#include <vector>
 
 void green(sil::Image &img)
 {
@@ -520,6 +521,32 @@ sil::Image convolution(sil::Image img, int coeff, int kernel)
     return res;
 }
 
+void tramage(sil::Image &img, float seuil)
+{
+    const int matrix_size = 4;
+    double matrix[matrix_size][matrix_size] =
+        {
+            {-0.5, 0, -0.375, 0.125},
+            {0.25, -0.25, 0.375, -0.125},
+            {-0.3125, 0.1875, -0.4375, 0.0625},
+            {0.4375, -0.0625, 0.3125, -0.1875},
+        };
+    for (int x = 0; x < img.width(); x++)
+    {
+        for (int y = 0; y < img.height(); y++)
+        {
+            if (img.pixel(x, y).r + img.pixel(x, y).b + img.pixel(x, y).g > seuil + matrix[x % 4][y % 4] * 4)
+            {
+                img.pixel(x, y) = glm::vec3{1.f};
+            }
+            else
+            {
+                img.pixel(x, y) = glm::vec3{0.f};
+            }
+        }
+    }
+}
+
 int main()
 {
     {
@@ -638,10 +665,16 @@ int main()
         // cas 1 : blur
         // cas 2 : outline
         // cas 3 : sharpen
+        // cas 4 : emboss
         sil::Image image("img/logo.png");
         convolution(image, 17, 1).save("output/blur.png");
         convolution(image, 3, 2).save("output/outline.png");
         convolution(image, 3, 3).save("output/sharpen.png");
         convolution(image, 3, 4).save("output/emboss.png");
+    }
+    {
+        sil::Image image("img/photo.jpg");
+        tramage(image, 2.2);
+        image.save("output/tramage.jpg");
     }
 }
