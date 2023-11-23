@@ -4,6 +4,7 @@
 #include <math.h>
 #include <complex>
 #include <vector>
+#include "functions.hpp"
 
 void green(sil::Image &img)
 {
@@ -419,7 +420,7 @@ sil::Image convolution(sil::Image img, int coeff, int kernel)
             glm::vec3 avg{0.f};
             switch (kernel)
             {
-            case 1: // flou/
+            case 1: // blur
                 for (int i{-((coeff - 1) / 2)}; i < coeff - (coeff - 1) / 2; i++)
                 {
                     for (int j{-((coeff - 1) / 2)}; j < coeff - (coeff - 1) / 2; j++)
@@ -436,9 +437,7 @@ sil::Image convolution(sil::Image img, int coeff, int kernel)
                 // res.pixel(x, y).r = avgR / std::pow(coeff, 2);
                 // res.pixel(x, y).g = avgG / std::pow(coeff, 2);
                 // res.pixel(x, y).b = avgB / std::pow(coeff, 2);
-                avg.r /= std::pow(coeff, 2);
-                avg.b /= std::pow(coeff, 2);
-                avg.g /= std::pow(coeff, 2);
+                avg /= std::pow(coeff, 2);
                 res.pixel(x, y) = avg;
                 break;
 
@@ -523,19 +522,18 @@ sil::Image convolution(sil::Image img, int coeff, int kernel)
 
 void tramage(sil::Image &img, float seuil)
 {
-    const int matrix_size = 4;
-    double matrix[matrix_size][matrix_size] =
-        {
-            {-0.5, 0, -0.375, 0.125},
-            {0.25, -0.25, 0.375, -0.125},
-            {-0.3125, 0.1875, -0.4375, 0.0625},
-            {0.4375, -0.0625, 0.3125, -0.1875},
-        };
-    for (int x = 0; x < img.width(); x++)
+    const float matrix[4][4]{
+        {-0.5, 0, -0.375, 0.125},
+        {0.25, -0.25, 0.375, -0.125},
+        {-0.3125, 0.1875, -0.4375, 0.0625},
+        {0.4375, -0.0625, 0.3125, -0.1875}};
+
+    for (int x{0}; x < img.width(); x++)
     {
-        for (int y = 0; y < img.height(); y++)
+        for (int y{0}; y < img.height(); y++)
         {
-            if (img.pixel(x, y).r + img.pixel(x, y).b + img.pixel(x, y).g > seuil + matrix[x % 4][y % 4] * 4)
+            // la condition définit à partir de combien le pixel est considéré comme clair par le programme
+            if (img.pixel(x, y).r + img.pixel(x, y).g + img.pixel(x, y).b > seuil + matrix[x % 4][y % 4] * 4)
             {
                 img.pixel(x, y) = glm::vec3{1.f};
             }
@@ -681,6 +679,7 @@ int main()
         convolution(image, 3, 2).save("output/outline.png");
         convolution(image, 3, 3).save("output/sharpen.png");
         convolution(image, 3, 4).save("output/emboss.png");
+        // convolution(convolution(convolution(convolution(image, 17, 1), 3, 4), 3, 3), 3, 2).save("output/mix_all_convolutions.png");
     }
     {
         sil::Image image("img/photo.jpg");
