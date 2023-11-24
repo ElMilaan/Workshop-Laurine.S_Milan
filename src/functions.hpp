@@ -50,3 +50,5 @@ void fractal(sil::Image &img);
 sil::Image convolution(sil::Image img, int coeff, int kernel);
 
 void tramage(sil::Image &img, float seuil);
+
+void sort(sil::Image &img);
