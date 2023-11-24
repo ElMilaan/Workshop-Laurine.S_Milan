@@ -110,6 +110,34 @@ Méthode 2 : </div>
 | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | logo classique                                                               | glitch raté                                                                                             | glitch demandé                                                                     |
 
+## Troisième journée de workshop
 
+#### ⭐⭐⭐ Fractale
+<div style= "text-align: justify;margin-top : 25px"> Nous avons obtenu en premier lieu une fractale plus pixelisée, puis nous avons obtenu la bonne fractale. </div>
 
+| ![fractale pixalisée](output/fractal_pixelized.png "image 24"){: height="200px";width="175px";} | ![fractale](output/fractal.png "image 25"){: height="200px"; width="175px"} |
+| ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| fractale pixelisée                                                                              | fractale                                                                    |
 
+#### ⭐⭐⭐⭐ Convolutions 
+<div style= "text-align: justify;margin-top : 25px"> Aprés avoir réalisé les différents exercices de convolutions, nous avons décidé d'écrire un programme qui peut réaliser toutes les convolutions (blur, outline, sharpen et emboss). À l'aide du 'swap' nous pouvons changer de fonction selon ce l'effet souhaité. </div>
+
+| ![logo Imac](img/../img/logo.png "image 1"){: height="200px";width="150px";} | ![blur](output/blur.png "image 26"){: height="200px";width="150px";} | ![outline](output/outline.png "image 27"){: height="200px";width="150px";} | ![sharpen](output/sharpen.png "image 28"){: height="200px";width="150px";} | ![emboss](output/emboss.png "image 29"){: height="200px";width="150px";} |
+| ---------------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| logo classique                                                               | blur                                                                 | outline                                                                    | sharpen                                                                    | emboss                                                                   |
+
+#### ⭐⭐⭐(⭐) Tramage
+
+| ![logo Imac ](img/photo.jpg "image 1"){: height="200px";width="175px";} | ![ tramage ](output/tramage.jpg "image 30"){: height="200px"; width="175px"} |
+| ----------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+
+## Quatrième jour de workshop
+
+#### ⭐⭐⭐⭐ Tri de pixels
+
+| ![logo Imac ](img/logo.png "image 1"){: height="200px";width="175px";} | ![ tri ](output/sort.png "image 31"){: height="200px"; width="175px"} |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------------- |
+
+##Conclusion
+
+<div style= "text-align: justify; margin-bottom : 25px"> Au-delà de la simple acquisition de compétences techniques, ce workshop nous a permis d'exprimer notre vision artistique à travers le langage du code. Nous avons compris les concepts fondamentaux, expérimenté des techniques de programmations et collaboré par pairs en utilisant git. Ce fut une riche experience éducative qui a su stimuler notre créativité dans le domaine captivant de la programmation d'effets sur images.
