@@ -4,6 +4,10 @@
 int main()
 {
     {
+        sil::Image image{200, 200};
+        image.save("output/black.png");
+    }
+    {
         sil::Image image{"img/logo.png"};
         green(image);
         image.save("output/green.png");
