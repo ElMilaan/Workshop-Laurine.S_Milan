@@ -68,7 +68,7 @@ int main()
     }
     {
         sil::Image image(500, 500);
-        disc(image, 250);
+        disc(image, 100);
         image.save("output/disc.png");
     }
     {

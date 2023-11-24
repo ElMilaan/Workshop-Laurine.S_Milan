@@ -63,10 +63,53 @@ Réalisé par Milan Junges et Laurine Suel
 
 
 #### ⭐⭐ Luminosité
-| ![logo Imac](img/../img/logo.png "image 1"){: height="200px";width="175px";} | ![logo imac split](output/rgb_split.png "image 12"){: height="200px";width="175px";} | ![logo imac split rose](output/rgb_split_without_green.png "image 13"){: height="200px";width="175px";} |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| logo classique                                                               | split demandé                                                                        | split sans vert                                                                                         |
+| ![photo 1](img/../img/photo.jpg "image 1"){: height="200px";width="175px";} | ![logo imac split](output/bright.jpg "image 14"){: height="200px";width="175px";} | ![logo imac split rose](output/dark.jpg "image 15"){: height="200px";width="175px";} |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| photo classique                                                             | photo éclaircie                                                                   | photo assombrie                                                                      |
 
-#### ⭐⭐ Rotation de 90
-| ![logo Imac](img/../img/logo.png "image 1"){: height="200px";width="175px";} | ![logo imac rotation](output/rotation_90.png "image 11"){: height="200px"; width="175px"} |
-| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+
+#### ⭐⭐ Disque
+| ![photo noire](output/black.png "image noire"){: height="200px";width="175px";} | ![disque](output/disc.png "image 16"){: height="200px"; width="175px"} |
+| ------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+
+## Deuxième journée de workshop
+
+<div style= "text-align: justify;"> Dans la matinée de cette deuxième journée, nous avons créé deux images. </div>
+
+#### ⭐ Cercle
+| ![photo noire](output/black.png "image noire"){: height="200px";width="175px";} | ![cercle](output/circle.png "image 17"){: height="200px"; width="175px"} |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+
+
+#### ⭐⭐⭐ Rosace
+| ![photo noire](output/black.png "image noire"){: height="200px";width="175px";} | ![rosace](output/rosace.png "image 18"){: height="200px"; width="175px"} |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+
+<div style= "text-align: justify;margin-top : 25px"> Ensuite dans l'aprés-midi nous avons réalisé une mosaïque ainsi que l'exercice « glitch ». </div>
+
+#### ⭐⭐ Mosaïque
+<div style= "text-align: justify;margin-top : 25px"> Pour créer notre mosaïque, nous avons procédé de deux manières différentes. </div>
+
+<div style= "text-align: justify;margin-top : 25px;text-decoration:underline"> 
+Méthode 1 : </div>
+<div style= "text-align:justify"> Nous avons tout d'abord réduit notre image en gardant 1 pixel sur 5 du logo, puis nous avons dupliqué cette petite image pour remplir notre grande image noire. </div>
+
+| ![logo Imac réduit](output/reduced.png "image 19"){: height="200px";width="175px";} | ![mozaique méthode 1](output/mosaique_reduced.png "image 20"){: height="200px"; width="175px"} |
+| ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+
+<div style= "text-align: justify;margin-top : 25px;text-decoration:underline"> 
+Méthode 2 : </div>
+<div style= "text-align:justify"> À l'inverse de la méthode 1, nous avons multiplié par 5 notre image noire, et nous avons dupliqué notre logo dans cette image. On observe donc une mozaïque beaucoup moins pixalisée. Nous avons deux méthodes pour ce programme là.</div>
+
+| ![logo Imac ](img/logo.png "image 1"){: height="200px";width="175px";} | ![mozaique méthode 2](output/mosaique_bigger1.png "image 21"){: height="200px"; width="175px"} |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+
+#### ⭐⭐⭐ Glitch
+
+| ![logo Imac](img/../img/logo.png "image 1"){: height="200px";width="175px";} | ![logo imac glitch raté](output/glitch_rate_mais_style.png "image 22"){: height="200px";width="175px";} | ![logo imac glitch](output/glitch.png "image 23"){: height="200px";width="175px";} |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| logo classique                                                               | glitch raté                                                                                             | glitch demandé                                                                     |
+
+
+
+
