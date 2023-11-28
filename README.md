@@ -78,7 +78,7 @@ ___
 
 #### ⭐⭐ Miroir
 
-<div style= "text-align: justify;margin : 25px 0"> Notre premier essaie de programme a permis de créer le "miroir raté". Dans ce programme il nous faut parcourir l'image entière (x par y). Une fois arrivé à la moitié de l'image, le programme reporte la partie gauche de l'image sur la partie droite de la bonne manière. Mais par symétrie, cette nouvelle partie droite est à nouveau reportée en miroir sur la partie gauche qui avait déjà été parcourue. Cela entraine le report de la partie droite (déjà modifiée) sur la partie gauche de l'image (cela n'a donc pas modifié cette partie gauche).</div>
+<div style= "text-align: justify;margin : 25px 0"> Notre premier essaie de programme a permis de créer le "miroir raté". Dans ce programme il nous faut parcourir l'image entière (x par y). Une fois arrivé à la moitié de l'image, le programme reporte la partie gauche de l'image sur la partie droite de la bonne manière. Mais par symétrie, cette nouvelle partie droite est à nouveau reportée en miroir sur la partie gauche qui avait déjà été parcourue. Cela entraine le report de la partie droite (déjà modifiée) sur la partie gauche de l'image (cela n'a donc pas modifié cette partie gauche). <!-- Il aurait été intéressant d'expliquer comment vous avez résolu ce problème --></div>
 
 | ![logo Imac](img/../img/logo.png "image 1"){: height="200px";} | ![logo imac fake miroir](output/fake_mirror.png "image 8"){: height="200px";} | ![logo imac miroir](output/mirror.png "image 9"){: height="200px";} |
 | -------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------- |
@@ -170,7 +170,7 @@ Méthode 1 : </div>
 
 <div style= "text-align: justify;margin-bottom:10px;margin-bottom:10px;text-decoration:underline"> 
 Méthode 2 : </div>
-<div style= "text-align:justify;margin-bottom:25px;"> À l'inverse de la méthode 1, nous avons multiplié par 5 notre image noire, et nous avons dupliqué notre logo dans cette image. On observe donc une mozaïque beaucoup moins pixalisée. Nous avons deux méthodes pour ce programme là.</div>
+<div style= "text-align:justify;margin-bottom:25px;"> À l'inverse de la méthode 1, nous avons multiplié par 5 notre image noire, et nous avons dupliqué notre logo dans cette image. On observe donc une mozaïque beaucoup moins pixalisée <!-- Vous n'avez pas installé le correcteur d'orthographe que je propose dans le cours dur Markdown ? Ca vous aurait évité ces diverses coquilles -->. Nous avons deux méthodes pour ce programme là.</div>
 
 | ![logo Imac ](img/logo.png "image 1"){: height="200px";} | ![mozaique méthode 2](output/mosaique_bigger1.png "image 21"){: height="200px";} |
 | -------------------------------------------------------- | -------------------------------------------------------------------------------- |
