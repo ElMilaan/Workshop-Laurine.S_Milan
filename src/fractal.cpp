@@ -5,7 +5,7 @@
 // Un peu pixélisé tout ça
 void fractal_pixelized(sil::Image &img)
 {
-    for (float x{0}; x < img.width(); x++)
+    for (float x{0}; x < img.width(); x++) // On n'aime pas faire des boucles où x est un float, car à cause des erreurs de précision lors de calculs entre float, on risque de louper une itération de la boucle (si les erreurs s'accumulent et dépassent 1, ce qui peut arriver sur de très grandes boucles). Il aurait été mieux que x soit un int, et de le static_cast en float au besoin (typiquement au moment de faire une division)
     {
         for (float y{0}; y < img.height(); y++)
         {

@@ -20,7 +20,7 @@ sil::Image convolution(sil::Image img, int coeff, int kernel)
             glm::vec3 avg{0.f};
             switch (kernel)
             {
-            case 1: // blur
+            case 1: // blur // Au lieu d'un int pour le kernel, vous auriez pu utiliser des enums, ce qui aurait permis de donner des noms explicites aux différentes alternatives : https://dsmte.github.io/Learn--cpp_programming/Lessons/S1/Variables#enum-un-type-suppl%C3%A9mentaire
                 for (int i{-((coeff - 1) / 2)}; i < coeff - (coeff - 1) / 2; i++)
                 {
                     for (int j{-((coeff - 1) / 2)}; j < coeff - (coeff - 1) / 2; j++)
